@@ -54,7 +54,7 @@ def add_to_chrome(request)
       #{request[:user] ? new_user : nil}
 
       # Get the new frontmost window
-      set current_front to the window 1
+      set current_front to the frontmost
 
       if window_mode is "incognito" then
         make new window with properties {mode: "incognito"}
@@ -69,7 +69,6 @@ def add_to_chrome(request)
     end tell
   EOSCRIPT
 
-  puts script
   IO.popen("osascript", "w") {|pipe| pipe.write(script) }
 end
 
