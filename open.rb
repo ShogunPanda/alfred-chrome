@@ -1,26 +1,28 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
+#
+# This file is part of the alfred-chrome workflow. Copyright (C) 2013 and above Shogun <shogun@cowtech.it>.
+# Licensed under the MIT license, which can be found at http://www.opensource.org/licenses/mit-license.php.
+#
 
 require "rubygems"
+require "strscan"
 require "oj"
 
 def parse_request
-  request = /(as (.+?)\s+)?(in incognito\s+)?(.+)/.match(ARGV.join(" ").strip)
+  scanner = StringScanner.new(ARGV.join(" ").strip)
 
-  if request then
-    user = request[2]
-    incognito, url = validate_incognito(request[3], request[4])
-    # Fetch all Chrome profiles and validate user
-    profiles = load_profiles
-    profile = profiles[user]
-    user = nil if !profile
+  # Get the user
+  user = scanner.scan(/as \S+\s*/i)
+  user = user.gsub(/^as /, "").strip if user
+  incognito = !!scanner.scan(/\s*in incognito\s*/i)
+  url = scanner.rest.strip
+  url = nil if url.empty?
+  profiles = load_profiles
+  profile = profiles[user]
+  user = nil if !profile
 
-    {:user => user, :incognito => incognito, :url => url, :profiles => profiles, :profile => profile}
-  end
-end
-
-def validate_incognito(incognito, url)
-  incognito = !!incognito
-  url == "in incognito" ? [true, nil] : [incognito, url]
+  {:user => user, :incognito => incognito, :url => url, :profiles => profiles, :profile => profile}
 end
 
 def load_profiles
@@ -41,6 +43,8 @@ def add_to_chrome(request)
   new_user = "tell application \"System Events\" to tell process \"Google Chrome\" to click menu item \"#{request[:user]}\" of menu 9 of menu bar 1\ndelay 1.5" 
   script = <<-EOSCRIPT
     tell application "Google Chrome"
+      activate
+      
       # Get the window mode and the original frontmost window
       set original_front to the frontmost
       set window_mode to "#{request[:incognito] ? "incognito" : "normal"}"
