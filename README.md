@@ -1,7 +1,9 @@
 # Alfred Chrome Workflow
 
 Website: [Link](https://sw.cowtech.it/alfred-chrome)
+
 Packal file: [Link](http://www.packal.org/workflow/alfred-chrome)
+
 Alfred forums topic: [Link](http://www.alfredforum.com/topic/9473-alfred-chrome-open-url-in-google-chrome-also-with-specific-profile)
 
 ## Description
