@@ -1,0 +1,3 @@
+github "crossroadlabs/Result" "2.0.1"
+github "crossroadlabs/Boilerplate" "0.2.4"
+github "crossroadlabs/Regex" "0.8.0"

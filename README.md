@@ -1,18 +1,32 @@
 # Alfred Chrome Workflow
 
-This workflow allows you to open a URL in [Google Chrome](https://www.google.com/intl/en/chrome/browser/) via [Alfred](http://www.alfredapp.com/).
+Website: [Link](https://sw.cowtech.it/alfred-chrome)
+Packal file: [Link](http://www.packal.org/workflow/alfred-chrome)
+Alfred forums topic: [Link](http://www.alfredforum.com/topic/9473-alfred-chrome-open-url-in-google-chrome-also-with-specific-profile)
 
-The recognized syntax is:
+## Description
 
-`chrome [as USER] [in incognito] URL`
+This workflow allows you to open a URL in [Google Chrome](https://www.google.com/chrome/) via [Alfred 3](https://www.alfredapp.com/).
 
-The text under square bracket is optional, the text in uppercase must be replaced with appropriate values.
+The recognized commands are:
+
+* `chrome [as $USER] [[in] incognito] $URL`
+* `chrome-canary [as $USER] [[in] incognito] $URL`
+* `canary [as $USER] [[in] incognito] $URL`
+
+Where 
+
+* each part between square brackets is optional.
+* `$URL` is the URL you want to open.
+* `$USER` must be replaced with a valid Chrome (Canary) profile name.
 
 ## Installation
 
-Apart from normal workflow installation, the only requirement is the [oj](https://github.com/ohler55/oj) gem, which can be installed by opening the terminal and running:
+Double click (or open in Alfred settings) the Alfred Chrome.alfredworkflow file.
 
-`gem install oj`
+## Uninstallation
+
+Remove the workflow via Alfred settings. 
 
 ## Copyright
 
