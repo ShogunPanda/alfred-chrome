@@ -24,7 +24,7 @@ Where
 
 ## Installation
 
-Double click (or open in Alfred settings) the Alfred Chrome.alfredworkflow file.
+Double click (or open in Alfred settings) the `Alfred Chrome.alfredworkflow` file.
 
 ## Uninstallation
 

@@ -1,4 +1,4 @@
-### 2.0.0 / 2016-09-03
+### 2.0.0 / 2016-09-04
 
 * Update for Alfred 3
 * Rewritten in Swift to simplify (un)installation.
