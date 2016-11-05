@@ -16,7 +16,7 @@ The recognized commands are:
 * `chrome-canary [as $USER] [[in] incognito] $URL`
 * `canary [as $USER] [[in] incognito] $URL`
 
-Where 
+Where
 
 * each part between square brackets is optional.
 * `$URL` is the URL you want to open.
@@ -25,6 +25,8 @@ Where
 ## Installation
 
 Double click (or open in Alfred settings) the `Alfred Chrome.alfredworkflow` file.
+
+This workflow is for Alfred 3 only therefore it works on macOS 10.9+ (Mavericks and following).
 
 ## Uninstallation
 

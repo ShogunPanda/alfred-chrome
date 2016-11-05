@@ -1,3 +1,9 @@
+### 2.0.1 / 2016-11-05
+
+* Allow profiles with spaces
+* Make url optional
+* Rewritten in Swift 3
+
 ### 2.0.0 / 2016-09-04
 
 * Update for Alfred 3
