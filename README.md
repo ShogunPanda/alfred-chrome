@@ -12,9 +12,9 @@ This workflow allows you to open a URL in [Google Chrome](https://www.google.com
 
 The recognized commands are:
 
-* `chrome [as $USER] [[in] incognito] $URL`
-* `chrome-canary [as $USER] [[in] incognito] $URL`
-* `canary [as $USER] [[in] incognito] $URL`
+* `chrome [as $USER] [[in] incognito] [$URL]`
+* `chrome-canary [as $USER] [[in] incognito] [$URL]`
+* `canary [as $USER] [[in] incognito] [$URL]`
 
 Where
 
