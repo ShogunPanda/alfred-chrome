@@ -1,8 +1,8 @@
-### 2.0.2 / 2016-11-23
+### 2.2.0 / 2016-11-23
 
 * Use static linking for the executable.
 
-### 2.0.1 / 2016-11-05
+### 2.1.0 / 2016-11-05
 
 * Allow profiles with spaces
 * Make url optional
