@@ -13,6 +13,7 @@ task :build do
   Dir.chdir("src/alfred-chrome/")
   system("swift build -Xswiftc -static-stdlib -c release")
   FileUtils.mv(".build/release/alfred-chrome", "../..", verbose: true)
+  Dir.chdir(orig)
 end
 
 desc "Cleans the build directories."
