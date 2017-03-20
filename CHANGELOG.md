@@ -1,3 +1,7 @@
+### 3.0.0 / 2017-03-20
+
+* Rewritten to easily choose profiles.
+
 ### 2.2.0 / 2016-11-23
 
 * Use static linking for the executable.

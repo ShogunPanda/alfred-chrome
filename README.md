@@ -10,17 +10,11 @@ Alfred forums topic: [Link](http://www.alfredforum.com/topic/9473-alfred-chrome-
 
 This workflow allows you to open a URL in [Google Chrome](https://www.google.com/chrome/) via [Alfred 3](https://www.alfredapp.com/).
 
-The recognized commands are:
+To trigger the workflow, type `chrome` or `cr`. Optionally you can add a URL.
 
-* `chrome [as $USER] [[in] incognito] [$URL]`
-* `chrome-canary [as $USER] [[in] incognito] [$URL]`
-* `canary [as $USER] [[in] incognito] [$URL]`
+Between the results you will a list of profiles to use to open the URL (or simply to open a new window).
 
-Where
-
-* each part between square brackets is optional.
-* `$URL` is the URL you want to open.
-* `$USER` must be replaced with a valid Chrome (Canary) profile name.
+If you hold the `Alt` key while selecting the result item, the window will be open using incognito mode.
 
 ## Installation
 
@@ -30,7 +24,16 @@ This workflow is for Alfred 3 only therefore it works on macOS 10.9+ (Mavericks 
 
 ## Uninstallation
 
-Remove the workflow via Alfred settings. 
+Remove the workflow via Alfred settings.
+
+## Specifying a different application
+
+If you use Canary version of Chrome or similar applications, like Chromium, you can instruct the workflow to use it.
+
+To do it:
+
+* In the Workflows settings, right click on Alfred Chrome workflow and select "Open in Terminal".
+* Enter and execute the following command: `echo "$APP" > application`, where `$APP` must be replaced with the app name, like you see in the Applications folder.
 
 ## Copyright
 
