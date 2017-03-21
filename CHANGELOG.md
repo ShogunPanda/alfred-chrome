@@ -1,3 +1,7 @@
+### 3.0.1 / 2017-03-21
+
+* Removed accidentally included file.
+
 ### 3.0.0 / 2017-03-20
 
 * Rewritten to easily choose profiles.
