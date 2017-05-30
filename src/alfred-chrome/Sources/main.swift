@@ -17,8 +17,10 @@ let name = fsManager.fileExists(atPath: "./application") ?
 guard
   let application = NSWorkspace.shared().fullPath(forApplication: name), let executable = Bundle(path: application)!.executablePath,
   let data = fsManager.contents(atPath: "\(application)/Contents/Info.plist"),
-  let plist = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any],
-  let supportDirectory = plist["CrProductDirName"]
+//   let plist = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any],
+//   let supportDirectory = plist["CrProductDirName"]
+//   CRProductDirName doesn't exist anymore in plist (only in Canary)
+  let supportDirectory = "Google/Chrome" as String?
 else {
   print("\(name) cannot be found.\nNothing to do! :(\n")
   exit(1)
