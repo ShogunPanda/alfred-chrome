@@ -26,14 +26,16 @@ This workflow is for Alfred 3 only therefore it works on macOS 10.9+ (Mavericks 
 
 Remove the workflow via Alfred settings.
 
-## Specifying a different application
+## Specifying a different flavor of Chrome
 
 If you use Canary version of Chrome or similar applications, like Chromium, you can instruct the workflow to use it.
 
 To do it:
 
-* In the Workflows settings, right click on Alfred Chrome workflow and select "Open in Terminal".
-* Enter and execute the following command: `echo "$APP" > application`, where `$APP` must be replaced with the app name, like you see in the Applications folder.
+* In the Workflows settings, select Alfred Chrome workflow
+* Open the `Configure workflow and variables` by clicking on the second icon on right section of the workflow header.
+* Under the `Workflow Environment Variables` section, create a variable called `ALFRED_CHROME_NAME` and enter the same name you see in your Applications folder.
+* Click on `Save` and you're good to go! :)
 
 ## Copyright
 
