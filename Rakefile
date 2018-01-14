@@ -9,16 +9,13 @@ require "json"
 desc "Build the main executable."
 task :build do
   # Compile the executable
-  orig = Dir.pwd
-  Dir.chdir("src/alfred-chrome/")
-  system("swift build -Xswiftc -static-stdlib -c release")
-  FileUtils.mv(".build/release/alfred-chrome", "../..", verbose: true)
-  Dir.chdir(orig)
+  system("go build -ldflags='-s -w'")
+  system("upx alfred-chrome") unless ENV["DEBUG"]
 end
 
 desc "Cleans the build directories."
 task :clean do
-  FileUtils.rm_rf(["alfred-chrome", "src/alfred-chrome/Sources/.build"], verbose: true)
+  FileUtils.rm_rf(["alfred-chrome"], verbose: true)
 end
 
 desc "Install the executable in the workflow directory for distribution."

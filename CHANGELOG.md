@@ -1,3 +1,9 @@
+### 4.0.0 / 2018-01-14
+
+* Rewritten the helper in Go in order to minimize the file size.
+* Vastly improve Chrom* detection.
+* Use Alfred Workflow configuration to specify an alternate Chrome installation.
+
 ### 3.0.1 / 2017-03-21
 
 * Removed accidentally included file.
