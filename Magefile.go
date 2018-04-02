@@ -11,9 +11,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
-	"syscall"
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
@@ -28,6 +28,18 @@ type WorkflowProperties struct {
 	ID string `plist:"bundleid"`
 }
 
+func step(message string, args ...interface{}) {
+	fmt.Printf("\x1b[33m--- %s\x1b[0m\n", fmt.Sprintf(message, args...))
+}
+
+func execute(env map[string]string, args ...string) error {
+	step("Executing: %s ...", strings.Join(args, " "))
+
+	_, err := sh.Exec(env, os.Stdout, os.Stderr, args[0], args[1:]...)
+
+	return err
+}
+
 // Build the executable.
 func Build() error {
 	mg.Deps(Clean)
@@ -38,21 +50,13 @@ func Build() error {
 	}
 
 	for _, cmd := range cmds {
-		fmt.Printf("Executing: %s ...\n", strings.Join(cmd, " "))
-
-		err := sh.Run(cmd[0], cmd[1:]...)
-
-		if err != nil {
-			return err
-		}
+		execute(nil, cmd...)
 	}
 
 	return nil
 }
 
 func Install() error {
-	mg.Deps(Build)
-
 	// Detect the right workflow
 	allWorkflows, err := filepath.Glob(strings.Replace(workflows, "~", os.Getenv("HOME"), -1))
 
@@ -66,6 +70,7 @@ func Install() error {
 		rawProperties, err := ioutil.ReadFile(workflow)
 
 		if err != nil {
+			fmt.Println(err)
 			continue
 		}
 
@@ -76,25 +81,18 @@ func Install() error {
 		}
 	}
 
-	fmt.Printf("Copying file %s to %s ...\n", target, chromeWorkflow)
-	return sh.Run("cp", target, chromeWorkflow)
+	return execute(nil, "cp", target, path.Dir(chromeWorkflow))
 }
 
 // Removes the executable.
 func Clean() {
-	fmt.Printf("Removing file %s ...\n", target)
+	step("Removing file %s ...", target)
 	os.Remove(target)
 }
 
 // Verifies the code.
 func Lint() error {
-	gopath, err := sh.Output("which", "go")
-
-	if err != nil {
-		return err
-	}
-
-	return syscall.Exec(gopath, []string{"", "vet"}, os.Environ())
+	return execute(nil, "go", "vet")
 }
 
 var Default = Build
