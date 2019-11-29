@@ -1,41 +1,37 @@
-### 4.0.0 / 2018-01-14
+### 2018-01-14 / 4.0.0
 
-* Rewritten the helper in Go in order to minimize the file size.
-* Vastly improve Chrom* detection.
-* Use Alfred Workflow configuration to specify an alternate Chrome installation.
+- Rewritten the helper in Go in order to minimize the file size.
+- Vastly improve Chrom\* detection.
+- Use Alfred Workflow configuration to specify an alternate Chrome installation.
 
-### 3.0.1 / 2017-03-21
+### 2017-03-20 / 3.0.1
 
-* Removed accidentally included file.
+- feat: Removed useless file.
 
-### 3.0.0 / 2017-03-20
+### 2017-03-20 / 3.0.0
 
-* Rewritten to easily choose profiles.
+- Rewritten to easily choose profiles.
 
-### 2.2.0 / 2016-11-23
+### 2016-11-23 / 2.2.0
 
-* Use static linking for the executable.
+- feat: Fixed CHANGELOG.
+- feat: Add CHANGELOG entry.
+- fix: Minor fix.
+- feat: Use static linking.
+- feat: Updated README.md
 
-### 2.1.0 / 2016-11-05
+### 2016-11-05 / 2.1.0
+
+- feat: Rewritten in Swift 3.
 
 * Allow profiles with spaces
 * Make url optional
-* Rewritten in Swift 3
 
-### 2.0.0 / 2016-09-04
+### 2016-09-04 / 2.0.0
 
-* Update for Alfred 3
-* Rewritten in Swift to simplify (un)installation.
+- Update for Alfred 3
+- Rewritten in Swift to simplify (un)installation.
 
-### 1.0.0 / 2014-11-05
+### 2013-10-13 / 1.0.0
 
-* Added install and uninstall commands.
-* Initial public version.
-
-### 0.0.2 / 2014-11-03
-
-* Finetuned execution and added the workflow file.
-
-### 0.0.1 / 2014-11-02
-
-* Initial version.
+- Initial version.
