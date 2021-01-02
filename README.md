@@ -1,14 +1,15 @@
 # Alfred Chrome Workflow
 
-Website: [Link](https://sw.cowtech.it/alfred-chrome)
-
-Packal file: [Link](http://www.packal.org/workflow/alfred-chrome)
-
-Alfred forums topic: [Link](http://www.alfredforum.com/topic/9473-alfred-chrome-open-url-in-google-chrome-also-with-specific-profile)
-
-## Description
+[![Release](https://img.shields.io/github/release/ShogunPanda/alfred-chrome.svg)](https://github.com/ShogunPanda/alfred-chrome/releases/latest)
+[![Packal](https://img.shields.io/badge/packal-alfred--chrome-green)](http://www.packal.org/workflow/alfred-chrome)
+[![Forum](https://img.shields.io/badge/forum-alfred--chrome-yellowgreen)](https://www.alfredforum.com/topic/9473-alfred-chrome-open-url-in-google-chrome-also-with-specific-profile)
+[![License](https://img.shields.io/github/license/ShogunPanda/alfred-chrome.svg)](https://github.com/ShogunPanda/alfred-chrome/blob/master/LICENSE.md)
 
 This workflow allows you to open a URL in [Google Chrome](https://www.google.com/chrome/) via [Alfred 3](https://www.alfredapp.com/).
+
+https://sw.cowtech.it/alfred-chrome
+
+## Description
 
 To trigger the workflow, type `chrome` or `cr`. Optionally you can add a URL.
 
@@ -32,10 +33,10 @@ If you use Canary version of Chrome or similar applications, like Chromium, you 
 
 To do it:
 
-* In the Workflows settings, select Alfred Chrome workflow
-* Open the `Configure workflow and variables` by clicking on the second icon on right section of the workflow header.
-* Under the `Workflow Environment Variables` section, create a variable called `ALFRED_CHROME_NAME` and enter the same name you see in your Applications folder.
-* Click on `Save` and you're good to go! :)
+- In the Workflows settings, select Alfred Chrome workflow
+- Open the `Configure workflow and variables` by clicking on the second icon on right section of the workflow header.
+- Under the `Workflow Environment Variables` section, create a variable called `ALFRED_CHROME_NAME` and enter the same name you see in your Applications folder.
+- Click on `Save` and you're good to go! :)
 
 ## Copyright
 
