@@ -1,0 +1,91 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  sanity:
+    name: Sanity Check
+    runs-on: macos-latest
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Restore cached dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo
+          key: cargo-${{ hashFiles('**/Cargo.toml') }}-${{ hashFiles('**/Cargo.lock') }}
+      - name: Setup Rust
+        run: rustup target add x86_64-apple-darwin aarch64-apple-darwin
+      - name: Analyze code
+        run: make check
+  versionCheck:
+    name: Check version
+    runs-on: macos-latest
+    needs: sanity
+    outputs:
+      build: ${{ steps.check.outputs.build }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - id: check
+        name: Check version
+        run: |
+          VERSION=$(cargo read-manifest | jq -r .version)
+          gh release view v$VERSION || echo "build=true" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    name: Build
+    runs-on: macos-latest
+    needs: versionCheck
+    if: ${{ needs.versionCheck.outputs.build == 'true' }}
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Restore cached dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo
+          key: cargo-${{ hashFiles('**/Cargo.toml') }}-${{ hashFiles('**/Cargo.lock') }}
+      - name: Setup Rust
+        run: rustup target add x86_64-apple-darwin aarch64-apple-darwin
+      - name: Build (Intel)
+        run: make build ARCH=x86_64-apple-darwin
+      - name: Build (Apple Silicon)
+        run: make build ARCH=aarch64-apple-darwin
+      - name: Save artifacts (Intel)
+        uses: actions/upload-artifact@v2
+        with:
+          name: x86_64-apple-darwin
+          path: ./dist/x86_64-apple-darwin/Alfred Chrome.alfredworkflow
+      - name: Save artifacts (Apple Silicon)
+        uses: actions/upload-artifact@v2
+        with:
+          name: aarch64-apple-darwin
+          path: ./dist/aarch64-apple-darwin/Alfred Chrome.alfredworkflow
+  release:
+    name: Release
+    runs-on: macos-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+      - name: Create release
+        run: |
+          VERSION=$(cargo read-manifest | jq -r .version)
+          mkdir release
+          mv "artifacts/x86_64-apple-darwin/Alfred Chrome.alfredworkflow" "release/Alfred Chrome (Intel).alfredworkflow"
+          mv "artifacts/aarch64-apple-darwin/Alfred Chrome.alfredworkflow" "release/Alfred Chrome (Apple Silicon).alfredworkflow"
+          gh release create -t $VERSION v$VERSION release/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
