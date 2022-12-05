@@ -1,0 +1,103 @@
+{
+  "bundleid": "it.cowtech.alfred.chrome",
+  "name": "Alfred Chrome",
+  "version": "",
+  "disabled": false,
+  "readme": "",
+  "description": "Opens a URL in Google Chrome, optionally in incognito and with specific profile.",
+  "webaddress": "https://sw.cowtech.it/alfred-chrome",
+  "createdby": "Shogun",
+  "variables": { "ALFRED_CHROME_NAME": "Google Chrome" },
+  "variablesdontexport": [],
+  "objects": [
+    {
+      "config": {
+        "type": 8,
+        "keyword": "cr",
+        "title": "",
+        "subtext": "",
+        "runningsubtext": "",
+        "escaping": 0,
+        "withspace": true,
+        "scriptfile": "./alfred-chrome",
+        "script": "",
+        "scriptargtype": 1,
+        "alfredfiltersresults": false,
+        "alfredfiltersresultsmatchmode": 0,
+        "argumenttreatemptyqueryasnil": false,
+        "argumenttrimmode": 0,
+        "argumenttype": 1,
+        "queuedelaycustom": 3,
+        "queuedelayimmediatelyinitially": true,
+        "queuedelaymode": 0,
+        "queuemode": 2
+      },
+      "uid": "211C5A45-1E27-402E-AF94-671ECF92C23D",
+      "type": "alfred.workflow.input.scriptfilter",
+      "version": 3
+    },
+    {
+      "config": {
+        "type": 8,
+        "keyword": "chrome",
+        "title": "",
+        "subtext": "",
+        "runningsubtext": "",
+        "escaping": 0,
+        "withspace": true,
+        "scriptfile": "./alfred-chrome",
+        "script": "",
+        "scriptargtype": 1,
+        "alfredfiltersresults": false,
+        "alfredfiltersresultsmatchmode": 0,
+        "argumenttreatemptyqueryasnil": false,
+        "argumenttrimmode": 0,
+        "argumenttype": 1,
+        "queuedelaycustom": 3,
+        "queuedelayimmediatelyinitially": true,
+        "queuedelaymode": 0,
+        "queuemode": 2
+      },
+      "uid": "73168DC1-FA1E-4B36-93F1-2F1039E75721",
+      "type": "alfred.workflow.input.scriptfilter",
+      "version": 3
+    },
+    {
+      "config": {
+        "type": 0,
+        "script": "{query}",
+        "scriptfile": "./alfred-chrome",
+        "scriptargtype": 0,
+        "escaping": 0,
+        "concurrently": true
+      },
+      "uid": "5A4F4B4B-25B7-4B49-A670-1BEBC0DF5EFE",
+      "type": "alfred.workflow.action.script",
+      "version": 2
+    }
+  ],
+  "connections": {
+    "211C5A45-1E27-402E-AF94-671ECF92C23D": [
+      {
+        "destinationuid": "5A4F4B4B-25B7-4B49-A670-1BEBC0DF5EFE",
+        "modifiers": 0,
+        "modifiersubtext": "",
+        "vitoclose": false
+      }
+    ],
+    "73168DC1-FA1E-4B36-93F1-2F1039E75721": [
+      {
+        "destinationuid": "5A4F4B4B-25B7-4B49-A670-1BEBC0DF5EFE",
+        "modifiers": 0,
+        "modifiersubtext": "",
+        "vitoclose": false
+      }
+    ],
+    "5A4F4B4B-25B7-4B49-A670-1BEBC0DF5EFE": []
+  },
+  "uidata": {
+    "211C5A45-1E27-402E-AF94-671ECF92C23D": { "xpos": 50, "ypos": 30 },
+    "73168DC1-FA1E-4B36-93F1-2F1039E75721": { "xpos": 50, "ypos": 170 },
+    "5A4F4B4B-25B7-4B49-A670-1BEBC0DF5EFE": { "xpos": 320, "ypos": 100 }
+  }
+}

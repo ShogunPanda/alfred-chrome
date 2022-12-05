@@ -1,10 +1,5 @@
 # Alfred Chrome Workflow
 
-[![Release](https://img.shields.io/github/release/ShogunPanda/alfred-chrome.svg)](https://github.com/ShogunPanda/alfred-chrome/releases/latest)
-[![Packal](https://img.shields.io/badge/packal-alfred--chrome-green)](http://www.packal.org/workflow/alfred-chrome)
-[![Forum](https://img.shields.io/badge/forum-alfred--chrome-yellowgreen)](https://www.alfredforum.com/topic/9473-alfred-chrome-open-url-in-google-chrome-also-with-specific-profile)
-[![License](https://img.shields.io/github/license/ShogunPanda/alfred-chrome.svg)](https://github.com/ShogunPanda/alfred-chrome/blob/master/LICENSE.md)
-
 This workflow allows you to open a URL in [Google Chrome](https://www.google.com/chrome/) via [Alfred](https://www.alfredapp.com/).
 
 https://sw.cowtech.it/alfred-chrome
@@ -17,15 +12,7 @@ Between the results you will a list of profiles to use to open the URL (or simpl
 
 If you hold the `Alt` key while selecting the result item, the window will be open using incognito mode.
 
-## Compatibility
-
-This workflow has been tested on Alfred 3, 4 and 5.
-
-## Installation
-
-Double click (or open in Alfred settings) the `Alfred Chrome.alfredworkflow` file.
-
-### Allow the helper to execute
+# Allow the helper to execute
 
 If you get the message `“alfred-chrome” cannot be opened because the developer cannot be verified.`, then you have to whitelist the execution of the helper:
 
