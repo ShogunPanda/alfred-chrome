@@ -60,12 +60,12 @@ jobs:
       - name: Build (Apple Silicon)
         run: make build ARCH=aarch64-apple-darwin
       - name: Save artifacts (Intel)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: x86_64-apple-darwin
           path: ./dist/x86_64-apple-darwin/alfred-chrome.alfredworkflow
       - name: Save artifacts (Apple Silicon)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: aarch64-apple-darwin
           path: ./dist/aarch64-apple-darwin/alfred-chrome.alfredworkflow
@@ -77,7 +77,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
       - name: Create release
