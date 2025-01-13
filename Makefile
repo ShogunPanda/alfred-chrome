@@ -1,4 +1,4 @@
-ARCH := x86_64-apple-darwin
+ARCH := aarch64-apple-darwin
 
 build:
 	cargo build --release --target=${ARCH}

@@ -1,5 +1,7 @@
-use std::{collections::HashMap, env};
+use std::os::unix::process::CommandExt;
+use std::{collections::HashMap, env, process::exit, process::Command};
 
+use fork::{daemon, setsid};
 use glob::glob;
 use md5::{Digest, Md5};
 use serde::{Deserialize, Serialize};
@@ -43,6 +45,16 @@ struct Action {
 struct Response {
   items: Vec<Action>,
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+struct Payload {
+  executable: String,
+  profile: String,
+  url: String,
+  incognito: bool,
+}
+
+const OPEN_FLAG: &str = "--alfred-chrome-execute";
 
 fn default_product_dir_name() -> String { String::from("") }
 
@@ -123,32 +135,46 @@ fn generate_alfred_actions(
 ) -> Vec<Action> {
   let mut actions: Vec<Action> = vec![];
 
+  let helper = env::args().next().unwrap();
+
   for profile in profiles {
     let uid = format!("chrome-{}-{}", md5(url), md5(profile.1.as_str()));
     let title = format!("Open {} using profile {}", display_type, profile.0);
-    let subtitle = format!(
+
+    let regular_subtitle = format!(
       "Open {} in {} using profile {}",
       display_url, application.name, profile.0
     );
-    let arg = format!(
-      "\"{}\" {} --profile-directory=\"{}\"",
-      application.executable, url, profile.1
-    );
-    let incognito_subtitle = format!("{} (in incognito)", subtitle);
-    let incognito_arg = format!("{} --incognito", arg);
+    let incognito_subtitle = format!("{} (in incognito)", regular_subtitle);
+
+    let regular_payload = serde_json::to_string(&Payload {
+      executable: application.executable.clone(),
+      profile: profile.1.clone(),
+      url: url.to_string(),
+      incognito: false,
+    })
+    .unwrap();
+
+    let incognito_payload = serde_json::to_string(&Payload {
+      executable: application.executable.clone(),
+      profile: profile.1.clone(),
+      url: url.to_string(),
+      incognito: true,
+    })
+    .unwrap();
 
     actions.push(Action {
       uid: Some(uid),
       title: Some(title),
-      subtitle,
-      arg,
+      subtitle: regular_subtitle,
+      arg: format!("'{}' {} '{}'", helper, OPEN_FLAG, regular_payload),
       mods: HashMap::from([(
         String::from("alt"),
         Action {
           uid: None,
           title: None,
           subtitle: incognito_subtitle,
-          arg: incognito_arg,
+          arg: format!("'{}' {} '{}'", helper, OPEN_FLAG, incognito_payload),
           mods: HashMap::new(),
         },
       )]),
@@ -158,7 +184,43 @@ fn generate_alfred_actions(
   actions
 }
 
+// TODO@PI: Open Chrome directly and try to use setsid to detach the process
+fn spawn_chrome() {
+  if daemon(false, false).is_err() {
+    eprintln!("Failed to daemonize Google Chrome.");
+    exit(1);
+  }
+
+  if setsid().is_err() {
+    eprintln!("Failed to detach Google Chrome.");
+    exit(1);
+  }
+
+  let raw_payload = env::args().skip(2).collect::<Vec<String>>().join(" ");
+  let payload: Payload = serde_json::from_str(&raw_payload).unwrap();
+
+  let mut args: Vec<&str> = vec![];
+
+  if !payload.url.is_empty() {
+    args.push(&payload.url);
+  }
+
+  let profile = format!("--profile-directory={}", payload.profile);
+  args.push(&profile);
+
+  if payload.incognito {
+    args.push("--incognito");
+  }
+
+  Command::new(payload.executable).args(args).exec();
+}
+
 fn main() {
+  if env::args().nth(1).unwrap_or_else(|| String::from("")) == OPEN_FLAG {
+    spawn_chrome();
+    return;
+  }
+
   // Gather informations about URL
   let url = String::from(env::args().collect::<Vec<String>>()[1..].join(" ").trim());
   let mut display_url = "a new window";
@@ -176,7 +238,7 @@ fn main() {
   // name, then find the application support folder
   let application = parse_chrome_information(application_path.trim()).unwrap_or_else(|e| {
     eprintln!("{}", e);
-    std::process::exit(1);
+    exit(1);
   });
 
   // Scan Chrome/Chromium folder and check for the profiles
@@ -184,7 +246,7 @@ fn main() {
 
   if profiles.is_empty() {
     eprintln!("Not suitable profiles found. Nothing to do! :(");
-    std::process::exit(1);
+    exit(1);
   }
 
   // Return the output
