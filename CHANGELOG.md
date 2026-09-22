@@ -1,3 +1,10 @@
+### 2026-09-22 / 6.0.0
+
+- Launch Chrome through macOS Launch Services to address Alfred process attribution and camera permission issues (#7, #9).
+- Resolve profile names from Chrome's Local State metadata and distinguish duplicate names (#8).
+- Pass workflow action payloads as arguments to preserve URLs containing shell metacharacters.
+- Update Gatekeeper installation instructions for current macOS versions (#10).
+
 ### 2018-01-14 / 4.0.0
 
 - Rewritten the helper in Go in order to minimize the file size.

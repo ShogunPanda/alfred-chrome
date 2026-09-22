@@ -1,7 +1,7 @@
 {
   "bundleid": "it.cowtech.alfred.chrome",
   "name": "Alfred Chrome",
-  "version": "",
+  "version": "6.0.0",
   "disabled": false,
   "readme": "",
   "description": "Opens a URL in Google Chrome, optionally in incognito and with specific profile.",
@@ -65,9 +65,9 @@
     {
       "config": {
         "type": 0,
-        "script": "{query}",
+        "script": "exec ./alfred-chrome --alfred-chrome-execute \"$1\"",
         "scriptfile": "./alfred-chrome",
-        "scriptargtype": 0,
+        "scriptargtype": 1,
         "escaping": 0,
         "concurrently": true
       },

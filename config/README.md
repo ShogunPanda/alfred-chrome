@@ -14,13 +14,33 @@ If you hold the `Alt` key while selecting the result item, the window will be op
 
 # Allow the helper to execute
 
-If you get the message `“alfred-chrome” cannot be opened because the developer cannot be verified.`, then you have to whitelist the execution of the helper:
+If macOS says the developer cannot be verified or Apple cannot verify that `alfred-chrome` is free of malware, allow the helper through System Settings. On recent macOS versions the warning only offers **Move to Trash** and **Done**; right-clicking **Open** does not bypass it.
 
-1. Open Alfred preferences.
-2. Go to workflows.
-3. Right click (or Alt+Click) on the Alfred Workflow item and select "Open in Finder".
-4. Inside finder right click (or Alt+Click) on `alfred-chrome` and then select "Open".
-5. You should see a warning from the operating system. Just allow the execution and you're done.
+1. Install the workflow from this repository's releases and trigger `cr` in Alfred once.
+2. Choose **Done** to dismiss the warning.
+3. Open **System Settings → Privacy & Security**, then scroll to **Security**.
+4. Click **Open Anyway** next to the message about `alfred-chrome`, authenticate if prompted, and confirm **Open**.
+5. Trigger `cr` again in Alfred.
+
+If the entry is missing, open Alfred preferences, select the workflow, and choose **Open in Finder** from its context menu. Try opening the `alfred-chrome` helper, then return to Privacy & Security. On older macOS versions, the equivalent controls are under **System Preferences → Security & Privacy → General**. Managed Macs may require assistance from the administrator.
+
+See [Apple's instructions for opening an unidentified developer's app](https://support.apple.com/en-us/102445) for the current Gatekeeper exception procedure.
+
+### Chrome permissions and profile names
+
+Chrome is launched through macOS Launch Services so camera, microphone, and network permissions are associated with Chrome. After upgrading from an older workflow, fully quit Chrome and reopen it with `cr` before checking these permissions.
+
+Profile names use Chrome's `Local State` metadata, including account and custom names, with per-profile preferences as a fallback. Duplicate display names include the profile directory to distinguish them.
+
+### No profiles found: Alfred file permissions
+
+If `cr` shows no profiles and the workflow debugger reports `Not suitable profiles found. Nothing to do! :(`, check that Alfred has permission to access Chrome's profile files.
+
+1. Open **System Settings → Privacy & Security → Files & Folders** and review Alfred's file-access permissions.
+2. Enable the relevant file-access permissions for Alfred. If macOS prompts to allow Alfred to access or modify files from other apps, allow access to Chrome's data. The wording varies by macOS version.
+3. Quit and reopen Alfred, then try `cr` again.
+
+This can affect Alfred even when the helper works from Terminal, because macOS grants file access separately to each application. If the problem persists, confirm Chrome has an existing profile and `ALFRED_CHROME_NAME` identifies the intended browser.
 
 ## Uninstallation
 

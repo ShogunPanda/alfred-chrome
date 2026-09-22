@@ -1,6 +1,6 @@
 [package]
   name        = "alfred-chrome"
-  version     = "5.1.0"
+  version     = "6.0.0"
   edition     = "2021"
   description = "Opens a URL in Google Chrome, optionally in incognito and with specific profile."
   homepage    = "https://sw.cowtech.it/alfred-chrome"
@@ -10,7 +10,6 @@
   categories  = ["command-line-utilities", "command-line-interface"]
 
 [dependencies]
-  fork       = "^0.2.0"
   glob       = "^0.3.2"
   md-5       = "^0.10.6"
   plist      = "^1.7.0"
